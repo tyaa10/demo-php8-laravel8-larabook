@@ -9,6 +9,6 @@ class Topic extends Model
 {
     use HasFactory;
     protected $primaryKey = 'id';
-    protected $table = 'topics';
+    protected $table = 'Topics';
     protected $fillable = ['topicname','created_at','updated_at'];
 }

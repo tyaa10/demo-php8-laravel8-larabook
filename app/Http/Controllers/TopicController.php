@@ -15,7 +15,7 @@ class TopicController extends Controller
      */
     public function index()
     {
-        //
+        return 'Topic Root View';
     }
 
     /**
@@ -37,9 +37,14 @@ class TopicController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'topicname' => 'required|unique:Topics|max:100'
+        ]);
         $topic = new Topic;
         $topic->topicname = $request->topicname;
-        $topic->save();
+        if ($topic->save()) {
+            return redirect()->action('App\Http\Controllers\TopicController@create')->with('message','New topic '.$topic->topicname.' has been added with id='. $topic->id.'!');
+        }
     }
 
     /**
